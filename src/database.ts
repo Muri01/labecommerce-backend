@@ -33,12 +33,12 @@ export const purchease:TPurchase[] = [
         userId: "user-test1",
         productId: "Arroz",
         quantify: 3,
-        totalPrice: 30
+        totalPrice: product[0].price * 3
     },
     {
         userId: "user-test2",
         productId: "Guarana",
         quantify: 3,
-        totalPrice: 60
+        totalPrice: product[1].price * 3
     },
 ]

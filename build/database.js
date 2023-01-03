@@ -32,13 +32,13 @@ exports.purchease = [
         userId: "user-test1",
         productId: "Arroz",
         quantify: 3,
-        totalPrice: 30
+        totalPrice: exports.product[0].price * 3
     },
     {
         userId: "user-test2",
         productId: "Guarana",
         quantify: 3,
-        totalPrice: 60
+        totalPrice: exports.product[1].price * 3
     },
 ];
 //# sourceMappingURL=database.js.map

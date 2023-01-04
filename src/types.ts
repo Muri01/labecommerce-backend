@@ -1,9 +1,7 @@
 export enum Category{
     ACCESSORIES = "Acessórios",
     CLOTHES_AND_SHOES = "Roupas e calçados",
-    ELECTRONICS = "Eletrônicos",
-    VESTIDO = "vestido",
-    CHAPEU = "chapeu"
+    ELECTRONICS = "Eletrônicos"
 }
 
 export type TUser = {

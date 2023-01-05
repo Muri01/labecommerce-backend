@@ -1,44 +1,86 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.purchease = exports.product = exports.users = void 0;
+exports.queryProductsByName = exports.getProductById = exports.getAllProduts = exports.createProduct = exports.getAllUsers = exports.createUser = exports.purchease = exports.products = exports.users = void 0;
+const types_1 = require("./types");
 exports.users = [
     {
-        id: "user-test1",
+        id: "user1",
         email: "user1@email.com",
         passaword: "test1"
     },
     {
-        id: "user-test2",
+        id: "user2",
         email: "user2@email.com",
         passaword: "test2"
     },
 ];
-exports.product = [
+exports.products = [
     {
         id: "product1",
         name: "Arroz",
         price: 10,
-        category: "grão"
+        category: types_1.Category.GRAOS
     },
     {
         id: "product2",
         name: "Guarana",
         price: 20,
-        category: "bebida"
+        category: types_1.Category.BEBIDAS
     },
 ];
 exports.purchease = [
     {
-        userId: "user-test1",
+        userId: "user1",
         productId: "Arroz",
         quantify: 3,
-        totalPrice: exports.product[0].price * 3
+        totalPrice: exports.products[0].price * 3
     },
     {
-        userId: "user-test2",
+        userId: "user2",
         productId: "Guarana",
         quantify: 3,
-        totalPrice: exports.product[1].price * 3
+        totalPrice: exports.products[1].price * 3
     },
 ];
+function createUser(id, email, passaword) {
+    const newUser = {
+        id,
+        email,
+        passaword
+    };
+    exports.users.push(newUser);
+    return "Cadastro realizado com sucesso";
+}
+exports.createUser = createUser;
+function getAllUsers() {
+    return exports.users;
+}
+exports.getAllUsers = getAllUsers;
+function createProduct(id, name, price, category) {
+    const newProduct = {
+        id,
+        name,
+        price,
+        category
+    };
+    exports.products.push(newProduct);
+    return "Produto cadastrado com sucesso";
+}
+exports.createProduct = createProduct;
+function getAllProduts() {
+    return exports.products;
+}
+exports.getAllProduts = getAllProduts;
+function getProductById(products, idToSearce) {
+    return products.filter((product) => {
+        return product.id = idToSearce;
+    });
+}
+exports.getProductById = getProductById;
+function queryProductsByName(q) {
+    return exports.products.filter((product) => {
+        return product.name.toLowerCase().includes(q.toLowerCase());
+    });
+}
+exports.queryProductsByName = queryProductsByName;
 //# sourceMappingURL=database.js.map

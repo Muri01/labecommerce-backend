@@ -79,3 +79,13 @@ app.post("/purchases", (req:Request,res: Response)=>{
     purchases.push(newProduct)
     res.status(201).send("Compra adicionado com Sucesso!")
 })
+
+
+//Get products by id
+app.get("/products/:id", (req:Request, res:Response)=>{
+    const id = req.params.id
+
+    const result = products.find((product)=> product.id === id)
+
+    res.status(200).send(result)
+})

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.queryProductsByName = exports.getProductById = exports.getAllProduts = exports.createProduct = exports.getAllUsers = exports.createUser = exports.purchease = exports.products = exports.users = void 0;
+exports.getAllPurchasesFromUserId = exports.createPurchase = exports.queryProductsByName = exports.getProductById = exports.getAllProduts = exports.createProduct = exports.getAllUsers = exports.createUser = exports.purchases = exports.products = exports.users = void 0;
 const types_1 = require("./types");
 exports.users = [
     {
@@ -28,7 +28,7 @@ exports.products = [
         category: types_1.Category.BEBIDAS
     },
 ];
-exports.purchease = [
+exports.purchases = [
     {
         userId: "user1",
         productId: "Arroz",
@@ -83,4 +83,21 @@ function queryProductsByName(q) {
     });
 }
 exports.queryProductsByName = queryProductsByName;
+function createPurchase(userId, productId, quantify, totalPrice) {
+    const newPurchase = {
+        userId,
+        productId,
+        quantify,
+        totalPrice
+    };
+    exports.purchases.push(newPurchase);
+    return "Compra realizado com sucesso";
+}
+exports.createPurchase = createPurchase;
+function getAllPurchasesFromUserId(userIdToSearch) {
+    return exports.purchases.filter((purchase) => {
+        return purchase.userId = userIdToSearch;
+    });
+}
+exports.getAllPurchasesFromUserId = getAllPurchasesFromUserId;
 //# sourceMappingURL=database.js.map

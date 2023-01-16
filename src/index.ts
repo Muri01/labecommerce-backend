@@ -47,7 +47,7 @@ app.post("/users", (req:Request,res: Response)=>{
     const newUser:TUser={
         id: req.body.id as string,
         email: req.body.email as string,
-        passaword: req.body.passaword as string
+        password: req.body.password as string
     }
 
     users.push(newUser)
@@ -78,4 +78,89 @@ app.post("/purchases", (req:Request,res: Response)=>{
 
     purchases.push(newProduct)
     res.status(201).send("Compra adicionado com Sucesso!")
+})
+
+
+//Get products by id
+app.get("/products/:id", (req:Request, res:Response)=>{
+    const id = req.params.id
+
+    const result = products.find((product)=> product.id === id)
+
+    res.status(200).send(result)
+})
+
+//Get User Purchases by User id
+app.get("/purchases/:id", (req:Request, res:Response)=>{
+    const id = req.params.id
+
+    const result = purchases.find((purchase)=> purchase.userId === id)
+
+    res.status(200).send(result)
+})
+
+//Delete User by id
+app.delete("/accounts/:id", (req:Request, res:Response)=>{
+    const id = req.params.id
+
+    const userIndex = users.findIndex((user)=> user.id === id)
+
+    if (userIndex >= 0){
+        users.splice(userIndex,1)
+    }
+
+    res.status(200).send("Item deletado com sucesso")
+})
+
+// Delete Product by id
+app.delete("/products/:id", (req:Request, res:Response)=>{
+    const id = req.params.id
+
+    const productIndex = products.findIndex((product)=> product.id === id)
+
+    if (productIndex >= 0){
+        products.splice(productIndex,1)
+    }
+
+    res.status(200).send("Produto deletado com sucesso")
+})
+
+// Edit User by id
+app.put('/users/:id', (req:Request, res:Response)=>{
+
+    const id = req.params.id
+
+
+    const NewEmail = req.body.email as string | undefined
+    const NewePassword = req.body.password as string | undefined
+
+    const user = users.find((user)=> user.id === id)
+
+    if(user){
+        user.email = NewEmail || user.email
+        user.password = NewEmail || user.password
+    }
+
+    res.status(200).send("Cadastro atualizado com sucesso")
+})
+
+// Edit Product by id
+app.put('/products/:id', (req:Request, res:Response)=>{
+
+    const id = req.params.id
+
+
+    const newName = req.body.name as string | undefined
+    const newPrice = req.body.price as number | undefined
+    const newCategory = req.body.category as Category
+
+    const product = products.find((product)=> product.id === id)
+
+    if(product){
+        product.name = newName || product.name
+        product.price = newPrice || product.price
+        product.category = newCategory || product.category
+    }
+
+    res.status(200).send("Produto atualizado com sucesso")
 })

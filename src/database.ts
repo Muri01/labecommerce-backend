@@ -4,12 +4,12 @@ export const users:TUser[] = [
     {
         id: "user1",
         email: "user1@email.com",
-        passaword: "test1"
+        password: "test1"
     },
     {
         id: "user2",
         email: "user2@email.com",
-        passaword: "test2"
+        password: "test2"
     },
 ]
 
@@ -45,11 +45,11 @@ export const purchases:TPurchase[] = [
 
 //==================== typeScript II ====================
 //--------USER----------
-export function createUser(id: string, email: string, passaword: string): string{
+export function createUser(id: string, email: string, password: string): string{
     const newUser: TUser = {
         id,
         email,
-        passaword
+        password
     }
     users.push(newUser)
     return "Cadastro realizado com sucesso"

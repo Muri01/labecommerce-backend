@@ -7,7 +7,7 @@ export enum Category{
 export type TUser = {
     id: string,
     email: string,
-    passaword: string
+    password: string
 }
 
 export type TProduct = {

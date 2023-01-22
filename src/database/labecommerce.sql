@@ -1,7 +1,7 @@
 -- Active: 1674245104584@@127.0.0.1@3306
 
 
--- INTRO SQL --
+--------------------- INTRO SQL ----------------------------
 -- Exercicio2
 CREATE TABLE users (
 	id TEXT PRIMARY KEY UNIQUE NOT NULL,
@@ -33,7 +33,7 @@ SELECT * FROM products;
 
 
 
--- APROFUNDAMENTO SQL --
+--------------------- APROFUNDAMENTO SQL ----------------------------
 
 --Ex1
 --Get All Users
@@ -100,3 +100,33 @@ SELECT * FROM products
 ORDER BY balance DESC;
 
 
+--------------------- RELACOES SQL ----------------------------
+
+CREATE TABLE purchases(
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    total_price REAL NOT NULL,
+    paid INTEGER NOT NULL,
+    delivered_at TEXT,
+    buyer_id TEXT NOT NULL,
+    FOREIGN KEY(buyer_id) REFERENCES users(id)
+);
+
+INSERT INTO purchases (id, total_price, paid, buyer_id)
+VALUES (
+    "pu004",
+    78.13,
+    0,
+    "user01"
+);
+
+
+--Ex2
+
+UPDATE purchases
+SET delivered_at = DATETIME("now")
+WHERE buyer_id = "user01";
+
+--Ex3
+SELECT * FROM purchases
+INNER JOIN users
+ON purchases.buyer_id = users.id;

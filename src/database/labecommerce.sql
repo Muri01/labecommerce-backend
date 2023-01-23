@@ -100,7 +100,7 @@ SELECT * FROM products
 ORDER BY balance DESC;
 
 
---------------------- RELACOES SQL ----------------------------
+--------------------- RELACOES SQL I ----------------------------
 
 CREATE TABLE purchases(
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
@@ -110,6 +110,8 @@ CREATE TABLE purchases(
     buyer_id TEXT NOT NULL,
     FOREIGN KEY(buyer_id) REFERENCES users(id)
 );
+
+SELECT * FROM purchases;
 
 INSERT INTO purchases (id, total_price, paid, buyer_id)
 VALUES (
@@ -130,3 +132,33 @@ WHERE buyer_id = "user01";
 SELECT * FROM purchases
 INNER JOIN users
 ON purchases.buyer_id = users.id;
+
+
+
+--------------------- RELACOES SQL  II ----------------------------
+-- Ex1
+CREATE TABLE purchases_products(
+    purchases_id TEXT NOT NULL,
+    product_id TEXT NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY (purchases_id) REFERENCES purchases(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+DROP TABLE purchases_products;
+
+-- Ex2
+INSERT INTO purchases_products(purchases_id, product_id, quantity)
+VALUES 
+    ("pu001","product1", 5),
+    ("pu002","product3", 2), 
+    ("pu003","product2", 1);
+
+SELECT * FROM purchases_products;
+
+
+SELECT * FROM purchases_products
+INNER JOIN purchases
+ON purchases_products.purchases_id = purchases.id
+INNER JOIN products
+ON purchases_products.product_id = products.id

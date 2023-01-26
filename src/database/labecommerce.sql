@@ -1,4 +1,4 @@
--- Active: 1674245104584@@127.0.0.1@3306
+-- Active: 1674745433992@@127.0.0.1@3306
 
 
 --------------------- INTRO SQL ----------------------------
@@ -13,6 +13,8 @@ INSERT INTO users (id, email, password)
 VALUES ("user3", "user3@email.com", "test3");
 
 SELECT * FROM users;
+
+DROP TABLE users;
 
 -- Exercicio3
 CREATE TABLE products (

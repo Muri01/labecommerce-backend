@@ -2,6 +2,7 @@ import {createUser, products, purchases, users, getProductById, queryProductsByN
 import  express, { Request, Response} from 'express'
 import cors from 'cors';
 import { Category, TProduct, TPurchase, TUser } from "./types";
+import { db } from "./database/knex";
 
 
 // -------- EXERCICIO 1 --------
@@ -23,14 +24,66 @@ app.get("/ping", (req: Request, res: Response) => {
 
   // -------- EXERCICIO 2 --------
 //GET All Users
-app.get("/users", (req:Request,res: Response)=>{
-    res.status(200).send(users)
-  })
+// app.get("/users", (req:Request,res: Response)=>{
+//     res.status(200).send(users)
+//   })
+
+app.get("/users", async (req:Request, res:Response)=>{
+    try {
+
+        const result = await db.raw(`
+        SELECT * FROM users`)
+
+        if(result < 1){
+            res.status(400)
+            throw new Error("tabela vazia")
+        }
+        res.status(200).send(result)
+    } catch (error) {
+        console.log(error)
+
+        if(req.statusCode === 200){
+            res.status(500)
+        }
+        if (error instanceof Error) {
+            res.send(error.message)
+        } else {
+            res.send("Erro inesperado")
+        }
+
+    }
+})
 
 //Get All products
-app.get("/products", (req:Request,res: Response)=>{
-    res.status(200).send(products)
-  })
+// app.get("/products", (req:Request,res: Response)=>{
+//     res.status(200).send(products)
+//   })
+
+app.get("/products", async (req:Request, res:Response)=>{
+    try {
+
+        const result = await db.raw(`
+        SELECT * FROM products`)
+        if(result < 1){
+            res.status(400)
+            throw new Error("tabela vazia")
+        }
+        res.status(200).send(result)
+
+    } catch (error) {
+        console.log(error)
+
+        if(req.statusCode === 200){
+            res.status(500)
+        }
+        if (error instanceof Error) {
+            res.send(error.message)
+        } else {
+            res.send("Erro inesperado")
+        }
+
+    }
+})
 
 //Search Products by name
 app.get("/products/search", (req:Request,res: Response)=>{
